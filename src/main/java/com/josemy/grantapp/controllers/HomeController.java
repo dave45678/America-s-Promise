@@ -103,7 +103,6 @@ public class HomeController {
     String emailTo = student.getEmail();
     emailService.SendSimpleEmail(emailTo, "Thank you for providing your " +
             "information. You will be contacted soon.");
-
     return "success";
   }
 
@@ -120,6 +119,5 @@ public class HomeController {
     model.addAttribute("student", studentRepository.findById(id).get());
     return "sendemail";
   }
-
 
 }

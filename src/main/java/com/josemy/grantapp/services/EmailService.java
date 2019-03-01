@@ -57,6 +57,7 @@ public class EmailService {
     return templateEngine.process("mailtemplate", context);
   }
 
+
   public void SendSimpleEmail(String email, String appMesg){
     try {
 

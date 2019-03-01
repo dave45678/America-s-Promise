@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Index Page</title>
+    <th:block th:insert="base :: headstuff"></th:block>
+</head>
+<body>
+<nav th:replace="base :: navbar"></nav>
+<section class="space5"></section>
+<article class="container m-5 bg-light pl-5">
+    <section class="main-section">
+        <section class="space5"></section>
+        <h1 class="text-center ">America's Promise Grant Program</h1>
+        <section class="space5"></section>
+
+        <div class="grand_img"></div>
+
+        <div class="space2"></div>
+
+
+        <div class="row">
+            <div th:each="course : ${courses}" class="card m-4"
+                 style="width: 18rem; ">
+                <div class="card-body">
+                    <h5 th:text="${course.title}"
+                        class="card-title font-weight-bold">Card
+                        title</h5>
+                    <p class="card-text"
+                       th:text="${course.description}"></p>
+
+                    <div class="space2"></div>
+
+                    <a th:href="@{/detail/{id}(id=${course.id})}"
+                       class="text-light btn btn-color">Learn more</a>
+                </div>
+            </div>
+        </div>
+
+        <section class="space5"></section>
+
+        <span sec:authorize="isAuthenticated()">
+            <div align="center">
+            <button type="button"
+                    class="btn btn-color"><a class="text-light" href="/add">Add A
+            Courses</a></button>
+                </div>
+        </span>
+
+        <span sec:authorize="!isAuthenticated()">
+        <div class="jumbotron"><p>Students must apply to be considered for
+            acceptance to a program.</p>
+            <button type="button"
+                    class="btn login-btn"><a
+                    class="text-light text-decoration-none"
+                    href="/studentForm">Apply Now!</a>
+            </button>
+        </div> <!-- End jumbotron -->
+        </span>
+
+        <div class="space5"></div>
+    </section><!-- end main section -->
+</article><!-- end container -->
+
+<th:block th:replace="base :: jslinks"></th:block>
+<div th:replace="base :: footer"></div>
+</body>
+</html>

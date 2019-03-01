@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <title>Index Page</title>
+    <th:block th:insert="base :: headstuff"></th:block>
+</head>
+<body>
+<nav th:replace="base :: navbar"></nav>
+<section class="space5"></section>
+<article class="container m-5 bg-light pl-5">
+
+    <h2 class="py-4 text-dark text-center">Application details</h2><br>
+
+        <section class="jumbotron">
+            <p th:inline="text" class="border-bottom font-weight-bold">Course -
+                [[${student.course
+                .title}]]</p>
+
+            <p th:inline="text"><strong>First name</strong> - [[${student.firstName}]]</p>
+            <p th:inline="text"><strong>Last name</strong> - [[${student.lastName}]]</p>
+            <p th:inline="text"><strong>Phone number</strong> - [[${student.phoneNumber}]]</p>
+            <p th:inline="text"><strong>Legally authorized?</strong>
+                - [[${student.workAuth}]]</p>
+            <p th:inline="text"><strong>Veteran Status</strong> -
+                [[${student.veteranStatus}]]</p>
+            <p th:inline="text"><strong>Employment Status</strong> -
+                [[${student.employmentStatus}]]</p>
+            <p th:inline="text"><strong>Name of school</strong> - [[${student.schoolName}]]</p>
+            <p th:inline="text"><strong>Location of school</strong> -
+                [[${student.schoolLocation}]]</p>
+            <p th:inline="text"><strong>Highest degree earned</strong> -
+                [[${student.highestEdu}]]</p>
+            <p th:inline="text"><strong>Major</strong> - [[${student.major}]]</p>
+            <p th:inline="text"><strong>Graduation Date</strong> -
+                [[${student.graduationYear}]]</p>
+            <p th:inline="text"><strong>Technical background</strong> -
+                [[${student.description}]]</p>
+        </section>
+
+    <form action="/sendSimpleEmail" method="post">
+        <button type="submit">Send simple email</button>
+    </form>
+
+        <section class="space10"></section>
+    <!--</section>-->
+</article>
+
+<nav th:replace="base :: footer"></nav>
+<th:block th:replace="base :: jslinks"></th:block>
+</body>
+</html>

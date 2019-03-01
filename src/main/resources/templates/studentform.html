@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <title>Index Page</title>
+    <th:block th:insert="base :: headstuff"></th:block>
+</head>
+<body>
+<nav th:replace="base :: navbar"></nav>
+<section class="space5"></section>
+<article class="container m-5 bg-light pl-5">
+
+    <h2 class="py-4 text-dark">America's Promise Grant Program Boot Camps
+        Application Form</h2><br>
+
+    <form action="#" th:action="@{/studentForm}"
+          th:object="${student}" method="post">
+
+        <input type="hidden" th:field="*{id}"/>
+
+        <section class="md-md-3"></section>
+        <section class="col-md-6">
+
+            <div class="form-group">
+                <label for="majorInput">Choose the course</label>
+                <select class="form-control" id="majorInput"
+                        th:field="*{course}">
+                    <option th:each="course : ${courses}"
+                            th:value="${course.id}"
+                            th:text="${course.title}"/>
+                </select>
+            </div>
+
+
+            <section class="form-group">
+                <label for="name" class="text-dark">First name</label>
+                <input type="text" class="form-control" id="name"
+                       th:field="*{firstName}"
+                       required="required"/>
+                <span th:if="${#fields.hasErrors('firstName')}"
+                      th:errors="*{firstName}"></span>
+            </section>
+
+            <section class="form-group">
+                <label for="lastName" class="text-dark">Last name</label>
+                <input type="text" class="form-control" id="lastName"
+                       th:field="*{lastName}"
+                       required="required"/>
+                <span th:if="${#fields.hasErrors('lastName')}"
+                      th:errors="*{lastName}"></span>
+            </section>
+
+
+            <!--&lt;!&ndash; Email section-->
+
+            <section class="form-group">
+                <label for="email" class="text-dark">Email</label>
+                <form action="">
+                    <input type="text" class="form-control" id="email"
+                    th:field="*{email}" required="required"/>
+
+                </form>
+                <!-- -&ndash;&gt;-->
+
+            </section>
+            <section class="form-group">
+                <label for="phone" class="text-dark">Phone number</label>
+                <input type="text" class="form-control" id="phone"
+                       th:field="*{phoneNumber}"
+                       required="required"/>
+                <span th:if="${#fields.hasErrors('phoneNumber')}"
+                      th:errors="*{phoneNumber}"></span>
+            </section>
+
+            <section class="form-group">
+                <label>Are you legally authorized to work in the United States?
+                </label><br>
+                <input th:field="*{workAuth}" type="radio" name="yes"
+                       value="yes"> Yes<br>
+                <span th:if="${#fields.hasErrors('workAuth')}"
+                      th:errors="*{workAuth}"></span>
+                <input th:field="*{workAuth}" type="radio" name="no"
+                       value="no"> No<br>
+                <span th:if="${#fields.hasErrors('workAuth')}"
+                      th:errors="*{workAuth}"></span>
+            </section>
+
+
+            <section class="form-group">
+                <label>Veteran Status
+                </label><br>
+                <input th:field="*{veteranStatus}" type="radio" name="yes"
+                       value="No">I am
+                NOT a
+                veteran<br>
+                <input th:field="*{veteranStatus}" type="radio" name="no"
+                       value="Veteran">I am a veteran<br>
+                <input th:field="*{veteranStatus}" type="radio" name="spouse"
+                       value="Spouse">I am the spouse
+                of a veteran<br>
+            </section>
+
+            <section class="form-group">
+                <label>What is your employment status?
+                </label><br>
+                <input th:field="*{employmentStatus}" type="radio" name="yes"
+                       value="Unemployed">
+                Unemployed<br>
+                <input th:field="*{employmentStatus}" type="radio" name="no"
+                       value="Underemployed"> Underemployed
+                (making less than $42,000/year)<br>
+            </section>
+
+
+            <section class="form-group">
+                <label for="school" class="text-dark">Name of school you
+                    graduated from or are currently attending</label>
+                <input th:field="*{schoolName}" type="text"
+                       class="form-control"
+                       id="school">
+            </section>
+            <section class="form-group">
+                <label for="location" class="text-dark">Location of your school
+                </label>
+                <input th:field="*{schoolLocation}" type="text"
+                       class="form-control"
+                       id="location">
+            </section>
+
+            <section class="form-group">
+                <label>Highest degree earned
+                </label><br>
+
+                <input th:field="*{highestEdu}" type="radio" name="A.A"
+                       value="A.A">AA
+                degree<br>
+                <input th:field="*{highestEdu}" type="radio" name="B.S"
+                       value="B.S">Bachelors Degree<br>
+                <input th:field="*{highestEdu}" type="radio" name="M.s"
+                       value="M.s">Masters Degree<br>
+                <input th:field="*{highestEdu}" type="radio" name="Ph.D"
+                       value="Ph.D">PhD.<br>
+            </section>
+            <section class="form-group">
+                <label for="major" class="text-dark">Your major
+                </label>
+                <input th:field="*{major}" type="text" class="form-control"
+                       id="major">
+            </section>
+            <section class="form-group">
+                <label for="graduation" class="text-dark">Graduation Date or
+                    Anticipated Graduation Date</label>
+                <input th:field="*{graduationYear}" type="text"
+                       class="form-control"
+                       id="graduation">
+            </section>
+            <section class="form-group">
+                <label for="background" class="text-dark">Use this text box to
+                    briefly explain your technical background. And ask
+                    questions.</label>
+                <textarea th:field="*{description}" type="text" rows="4"
+                          cols="50"
+                          class="form-control"
+                          id="background"></textarea>
+            </section>
+        </section>
+        <section class="md-sm-3"></section>
+        <!--</div>-->
+        <section class="col-md-12">
+            <button type="submit" class="btn login-btn pull-right text-light">
+                Submit
+            </button>
+        </section>
+        <div class="space5"></div>
+    </form>
+</article> <!-- end container -->
+
+<th:block th:replace="base :: jslinks"></th:block>
+<div th:replace="base :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Course Details</title>
+    <th:block th:insert="base :: headstuff"></th:block>
+</head>
+<body>
+<nav th:replace="base :: navbar"></nav>
+
+<article class="container m-5 bg-light">
+    <section class="my-4 py-5 pl-5">
+        <h1 th:inline="text">[[${course.title}]] Details</h1>
+        <section class="space5"></section>
+        <h4>Description</h4>
+        <p th:text="${course.description}"></p>
+        <section class="space2"></section>
+
+        <span sec:authorize="!isAuthenticated()">
+        <div align="center">
+            <button type="button"
+                    class="btn login-btn"><a
+                    class="text-light text-decoration-none"
+                    href="/studentForm">
+                Apply Now!</a>
+            </button>
+        </div>
+        </span>
+
+        <section class="space2"></section>
+
+        <br><br>
+        <span sec:authorize="isAuthenticated()">
+            <a class="text-color"
+               th:href="@{/update/{id}(id=${course.id})}">Update this
+                    course</a>&nbsp; - &nbsp;
+            <a class="text-color" th:href="@{/delete/{id}(id=${course.id})}">Delete this
+                    course</a><br>
+        </span>
+        <section class="space10"></section>
+    </section>
+</article>
+
+<nav th:replace="base :: footer"></nav>
+<th:block th:replace="base :: jslinks"></th:block>
+</body>
+</html>

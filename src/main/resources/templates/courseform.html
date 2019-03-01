@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Course Form</title>
+    <th:block th:insert="base :: headstuff"></th:block>
+</head>
+<body>
+<nav th:replace="base :: navbar"></nav>
+<section class="space5"></section>
+
+<article class="container m-5 bg-light pl-5" >
+    <h2 class="py-4">Add a course</h2><br>
+    
+    <form action="#" th:action="@{/process}" th:object="${course}"
+          method="post">
+        <input type="hidden" th:field="*{id}" />
+        <section class="md-sm-3"></section>
+
+        <section class="col-md-6">
+            <section class="form-group">
+                <label for="name">Course title</label>
+                <input type="text" class="form-control" id="name"
+                       placeholder="Enter course title" th:field="*{title}"
+                       required="required"/>
+                <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+            </section>
+            <section class="form-group">
+                <label for="description">Description</label>
+                <textarea rows="3" class="form-control" id="description"
+                          placeholder="Description" th:field="*{description}"
+                          required="required"/>
+                <span th:if="${#fields.hasErrors('description')}"
+                      th:errors="*{description}"></span>
+            </section>
+        </section>
+        <section class="md-sm-3"></section>
+        <section class="col-md-12">
+            <button type="submit"
+                    class="btn btn-color pull-right text-light">Submit
+            </button>
+        </section>
+        <section class="space5"></section>
+    </form>
+</article> <!-- end container -->
+
+<nav th:replace="base :: footer"></nav>
+<th:block th:replace="base :: jslinks"></th:block>
+</body>
+</html>

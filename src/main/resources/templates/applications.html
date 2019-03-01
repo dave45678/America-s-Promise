@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:insert="base :: headstuff"></th:block>
+</head>
+
+<body>
+<nav th:replace="base :: navbar"></nav>
+<section class="space5"></section>
+<article class="container m-5 bg-light" >
+    <h2 class="pt-4 text-dark text-center">Applications</h2><br>
+    <!--<section class="my-4 py-5 pl-5">-->
+    <section class="mb-4 py-5">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Student name</th>
+                <th>Course title</th>
+                <th>Action</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr  th:each="student : ${students}">
+                <td><span th:text="${student.firstName}"></span>&nbsp;<span
+                        th:text="${student.lastName}"></span></td>
+                <td th:text="${student.course.title}"></td>
+                <td><a th:href="@{/studentdetail/{id}(id=${student.id})}"
+                       class="text-light btn btn-color">View</a>
+                </td>
+                <td>
+                    <a th:href="@{/email/{id}(id=${student.id})}"
+                       class="text-light btn btn-color">Email</a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+    </section>
+</article>
+
+<nav th:replace="base :: footer"></nav>
+<th:block th:replace="base :: jslinks"></th:block>
+
+
+</body>
+</html>

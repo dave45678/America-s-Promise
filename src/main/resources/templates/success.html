@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Index Page</title>
+    <th:block th:insert="base :: headstuff"></th:block>
 </head>
 <body>
+<nav th:replace="base :: navbar"></nav>
+<section class="space5"></section>
+<article class="container m-5 bg-light pl-5">
 <h1>Email sent!</h1>
+<div class="space5"></div>
+
+</article><!-- end container -->
+<th:block th:replace="base :: jslinks"></th:block>
+<div th:replace="base :: footer"></div>
 </body>
 </html>

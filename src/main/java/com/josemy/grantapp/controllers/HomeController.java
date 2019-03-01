@@ -96,11 +96,15 @@ public class HomeController {
   @PostMapping("/studentForm")
   public String processStudentForm(@Valid @ModelAttribute Student student,
                                    BindingResult result) {
-    if (result.hasErrors()) {
-      return "studentform";
-    }
+//    if (result.hasErrors()) {
+//      return "studentform";
+//    }
     studentRepository.save(student);
-    return "redirect:/applications";
+    String emailTo = student.getEmail();
+    emailService.SendSimpleEmail(emailTo, "Thank you for providing your " +
+            "information. You will be contacted soon.");
+
+    return "success";
   }
 
   @RequestMapping("/studentdetail/{id}")
@@ -116,15 +120,6 @@ public class HomeController {
     model.addAttribute("student", studentRepository.findById(id).get());
     return "sendemail";
   }
-
-  @PostMapping("/sendSimpleEmail")
-  public String SendSimpleEmail(Student student) {
-    String email = student.getEmail();
-    System.out.println("Email " + email);
-    emailService.SendSimpleEmail(email);
-    return "success";
-  }
-
 
 
 }

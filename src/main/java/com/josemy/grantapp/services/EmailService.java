@@ -57,25 +57,27 @@ public class EmailService {
     return templateEngine.process("mailtemplate", context);
   }
 
-  public void SendSimpleEmail(String email){
+  public void SendSimpleEmail(String email, String message){
     try {
 
-      Message message = new MimeMessage(GetSession());
+      Message mimeMessage = new MimeMessage(GetSession());
+      String content=BuildTemplateWithContent(message);
+
 
       // The email address you're sending from
-      message.setFrom(new InternetAddress("testemail22cd@gmail.com"));
+      mimeMessage.setFrom(new InternetAddress("testemail22cd@gmail.com"));
 
       // The email address(es) you're sending the email to
-      message.setRecipients(Message.RecipientType.TO,
+      mimeMessage.setRecipients(Message.RecipientType.TO,
               InternetAddress.parse(email));
 
       // Email subject
-      message.setSubject("Hello World");
+      mimeMessage.setSubject("Test Template");
 
       // Email content
-      message.setText("Hello Earth!");
+      mimeMessage.setContent(content, "text/html; charset=utf-8");
 
-      Transport.send(message);
+      Transport.send(mimeMessage);
 
     } catch (MessagingException e) {
       throw new RuntimeException(e);
